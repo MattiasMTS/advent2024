@@ -1,0 +1,35 @@
+name: "advent2024"
+version: "1.0.0"
+
+profile: "prod"
+
+model-paths: ["models"]
+test-paths: ["seeds"]
+seed-paths: ["seeds"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+models:
+  +full_refresh: true
+  +materialized: table
+  advent2024:
+    day1:
+      +schema: "day1"
+      +tags: ["day1"]
+    day0:
+      +schema: "day0"
+      +tags: ["day0"]
+
+seeds:
+  +full_refresh: true
+  advent2024:
+    day1:
+      +schema: "day1"
+      +tags: ["day1"]
+    day0:
+      +schema: "day0"
+      +tags: ["day0"]

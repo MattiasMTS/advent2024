@@ -1,0 +1,12 @@
+unit_tests:
+  - name: test_0_2
+    model: model_0_2
+    expect:
+      rows:
+        # TODO: add answer
+        - { answer: 0 }
+    given:
+      - input: ref('input_0')
+        format: csv
+        # TODO: add in seeds/fixtures directory
+        fixture: test_input_0_2

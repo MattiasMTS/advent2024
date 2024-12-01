@@ -1,0 +1,9 @@
+prod:
+  target: prod
+  outputs:
+    prod:
+      type: duckdb
+      path: dbt.duckdb
+      extensions: []
+      settings:
+        max_expression_depth: 5000
