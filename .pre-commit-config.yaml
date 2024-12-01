@@ -1,0 +1,19 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: check-yaml
+        args:
+          - --unsafe
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+  - repo: https://github.com/tconbeer/sqlfmt
+    rev: v0.24.0
+    hooks:
+      - id: sqlfmt
+        language_version: python
+        additional_dependencies: [".[jinjafmt]"]
