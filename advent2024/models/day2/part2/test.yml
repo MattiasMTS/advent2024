@@ -1,0 +1,10 @@
+unit_tests:
+  - name: test_2_2
+    model: model_2_2
+    expect:
+      rows:
+        - { answer: 4 }
+    given:
+      - input: ref('input_2')
+        format: csv
+        fixture: test_input_2_2

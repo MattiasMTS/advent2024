@@ -17,6 +17,9 @@ models:
   +full_refresh: true
   +materialized: table
   advent2024:
+    day2:
+      +schema: "day2"
+      +tags: ["day2"]
     day1:
       +schema: "day1"
       +tags: ["day1"]
@@ -27,6 +30,9 @@ models:
 seeds:
   +full_refresh: true
   advent2024:
+    day2:
+      +schema: "day2"
+      +tags: ["day2"]
     day1:
       +schema: "day1"
       +tags: ["day1"]
