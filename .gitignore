@@ -1,17 +1,8 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
-
-# Cookies
-.env
-
-# Virtual environments
-.venv
-
-# dbt artifacts
-advent2024/dbt.duckdb
-advent2024/.user.yml
+.gradle
+.idea
+.kotlin/
+build
+# we don't need to include the input files.
+src/**/*.txt
+local.properties
+kls_database.db
