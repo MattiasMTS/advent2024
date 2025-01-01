@@ -1,170 +1,164 @@
-# ❄️ advent2024 ❄️
+# Advent of Code Kotlin Template
 
-<!--toc:start-->
+[Advent of Code][aoc] – an annual event in December since 2015.
+Every year since then, with the first day of December, a programming puzzles contest is published every day for twenty-five days.
+A set of Christmas-oriented challenges provides any input you have to use to answer using the language of your choice.
+We offer you a template prepared to use with [Kotlin][kotlin] language within this repository.
 
-- [❄️ advent2024 ❄️](#️-advent2023-️)
-- [🛠️ To get started 🛠️](#🛠️-to-get-started-🛠️)
-- [🏃Useful commands 🏃](#🏃useful-commands-🏃)
-- [🎄Repository Structure 🎄](#🎄repository-structure-🎄)
-- [🏋️Benchmark 🏋️](#🏋️benchmark-🏋️)
-<!--toc:end-->
+![][file:cover]
 
-https://adventofcode.com/2024
+## Live Streams
 
-Squirrel is coming to town in AoC 2024 :squirrel:
+Join us as we solve the Advent of Code challenges live on stream!
+Follow along to see step-by-step solutions, participate in problem-solving, and learn new strategies to tackle the puzzles.
+Whether you're stuck on a particular problem or just looking to improve your Kotlin skills, our live streams are here to help.
 
-# 🛠️ To get started 🛠️
+[Watch the live streams here!][youtube-playlist]
 
-Start by install `make` and `uv` on your OS.
+[![][file:livestream]][youtube-playlist]
 
-# 🏃Useful commands 🏃
+## Workflow
+**Advent of Code Kotlin Template** is a particular type of GitHub repository that lets you speed up the setup phase and start writing your AoC solutions immediately.
 
-Useful commands to get you started:
+The general idea is straightforward – to create a new project based on this template, you need to log in to your GitHub account and use the **Use this template** green button.
+And remember – **do not fork it!**
 
-1. generate the daily task:
+After creating a new project based on this template in your account, a dedicated GitHub Actions workflow will start and clean up the code from redundant files.
+It will also personalize code to use your username and project name in namespaces and Gradle properties.
+How cool is that?
 
-```shell
-make gen
-make gen day=9
-make gen year=2022 day=9
+You can clone it within the IntelliJ IDEA whenever the [@actions-user][actions-user] actor pushes the second commit to your repository.
+
+> [!IMPORTANT]
+>
+> Right after opening the project in IntelliJ IDEA, verify if you use at least **Java 11** as Project SDK.
+> To do that, visit [Project Structure Settings][docs-project-structure] (<kbd>⌘ Cmd</kbd><kbd>;</kbd> on macOS or <kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>Shift</kbd><kbd>S</kbd> on Windows/Linux).
+
+From now on, everything's in your hands!
+Join the [Advent of Code][aoc] contest to solve the *Day 01* as soon as it is published.
+
+Copy the `Day01.kt` solution file for the following days and increment the day number.
+
+> [!NOTE]
+>
+> Remember to join the Kotlin contest!
+>
+> To do that, edit your project's _About_ section with ⚙️ icon and add the `aoc-2024-in-kotlin` topic to your project.
+>
+> **We will find your repository and count you in our giveaway.**
+
+## Setup
+
+After you create a new project based on the current template repository using the **Use this template** button, a bare minimal scaffold will appear in your GitHub account with the following structure:
+
 ```
-
-By default it will generate today's task but can be changed via
-`year` and `day` keywords.
-
-2. test the code:
-
-```shell
-make test
-make test day=4 part=2
-make test day=4 part=2
-```
-
-By default it will test today's task and part 1, but can be changed via
-the `day` and `part` keywords.
-
-3. submit your answer
-
-```
-make submit
-make submit day=13 part=1
-```
-
-By default it will submit today's task and part 1, but can be changed via
-the `day` and `part` keywords.
-
-# 🎄Repository Structure 🎄
-
-The repository is structured as follows:
-
-- `models` is where your data models are stored. This contains the logic for transforming your input
-  data to the answer needed. The output of the model should be "answer: <int>".
-- `seeds` is where the input data for the submission is stored.
-- `tests` is where your assert input data is stored. This is used for testing your model is correct
-  with respect to the example data.
-
-```tree
 .
-├── Makefile
-├── README.md
-├── cli
-│   └── main.go
-├── day01
-│   ├── input.txt
-│   ├── part1.go
-│   ├── part1_test.go
-│   ├── part2.go
-│   └── part2_test.go
-├── go.mod
-├── go.sum
-└── templates
-    └── generate_aoc.go
+├── README.md               README file
+├── build.gradle.kts        Gradle configuration created with Kotlin DSL
+├── settings.gradle.kts     Gradle project settings
+├── gradle*                 Gradle wrapper files
+└── src
+    ├── Day01.kt            An empty implementation for the first AoC day
+    ├── Utils.kt            A set of utility methods shared across your days
+    │                       
+    │                       (create those files manually)
+    ├── Day01.txt           An empty file for the Day 01 input data
+    └── Day01_test.txt      An optional Day 01 test input data used for checks
 ```
 
-- `./cli/` folder is in charge of interacting with https://adventofcode.com website
-  for i) fetching the daily input and ii) submitting input.
+> [!NOTE]
+>
+> All task input files (`src/*.txt`) are excluded from the repository with `.gitignore` – we should not post them publicly, as [Eric Wastl requested for](https://twitter.com/ericwastl/status/1465805354214830081).
 
-  You can try it out by running:
+When the first puzzle appears, go to the `Day01.kt`, and for each `part1` and `part2` function, provide an algorithm implementation using the `input` data loaded from the `src/Day01.txt` file.
+This input data is common for both parts, and you can find it at the bottom of each day on the [Advent of Code][aoc] page.
 
-  ```shell
-  go run cli/main.go --help
-  ```
+To read the input data, you can go with the `readInput(name: String)` utility method provided in the [`Utils.kt`][file:utils] file, like:
 
-- `./templates/` contains the go templates for generating each day.
+```kotlin
+fun main() {
+    fun part1(input: List<String>): Int {
+        return input.size
+    }
 
-- `./dayXX/` contains the daily problems. For each part, we have a solution file
-  `partN.go` and a corresponding test file `partN_test.go`.
-
-  The test file can look like this:
-
-  ```go
-  func Test_solvePart1(t *testing.T) {
-  type args struct {
-  	input func() (string, error)
-  }
-  tests := []struct {
-  	args args
-  	name string
-  	want int
-  }{
-  	{
-  		name: "solvePart1() with test input",
-  		args: args{
-  			input: func() (string, error) {
-  				return "", nil // TODO: Add test input here.
-  			},
-  		},
-  		want: 0, // TODO: Add expected output here.
-  	},
-  }
-  ```
-
-  where you have to manually add the input and answer on the TODOs.
-  If you want to debug the `input.txt`, then just comment out the
-  `want` field from the `test input` test case and add `want: 1`
-  to the `input.txt` test case.
-
-# 🏋️Benchmark 🏋️
-
-```
-+---------------------------------------------+
-| Benchmark Results AoC 2024                  |
-+-------+------+----------------+-------------+
-| DAY   | PART | ANSWER         | TIME        |
-+-------+------+----------------+-------------+
-| day01 | 1    | 54644          | 240.278µs   |
-|       |      |                |             |
-|       | 2    | 53348          | 2.973872ms  |
-|       |      |                |             |
-| day02 | 1    | 2169           | 192.199µs   |
-|       |      |                |             |
-|       | 2    | 60948          | 273.45µs    |
-|       |      |                |             |
-| day03 | 1    | 527364         | 6.84216ms   |
-|       |      |                |             |
-|       | 2    | 79026871       | 5.721963ms  |
-|       |      |                |             |
-| day04 | 1    | 21158          | 427.507µs   |
-|       |      |                |             |
-|       | 2    | 6050769        | 408.992µs   |
-|       |      |                |             |
-| day06 | 1    | 1660968        | 11.721µs    |
-|       |      |                |             |
-|       | 2    | 26499773       | 30.572795ms |
-|       |      |                |             |
-| day07 | 1    | 253603890      | 1.261921ms  |
-|       |      |                |             |
-|       | 2    | 253630098      | 1.402404ms  |
-|       |      |                |             |
-| day08 | 1    | 19199          | 3.449268ms  |
-|       |      |                |             |
-|       | 2    | 13663968099527 | 7.43219ms   |
-|       |      |                |             |
-| day09 | 1    | 1887980197     | 4.063813ms  |
-|       |      |                |             |
-|       | 2    | 990            | 6.171931ms  |
-|       |      |                |             |
-+-------+------+----------------+-------------+
+    val input = readInput("Day01")
+    println(part1(input))
+}
 ```
 
-Benchmark table is generated by CI/CD or run `make benchmark`.
+## Running
+
+To call the algorithm you're implementing, click the green Play button next to the `fun main()` definition.
+
+![img.png](.github/readme/run.png)
+
+> [!IMPORTANT]
+>
+> Create relevant files Before running tasks or tests, like: `src/Day01.txt` or `src/Day01_test.txt`.
+
+The [`Utils.kt`][file:utils] file also contains the `String.md5()` method for generating MD5 hash out of the given string and expects more helper functions for the sake of the [KISS principle][kiss].
+
+Each puzzle describes some test conditions, a small portion of the information that helps check if the produced value for the given test input is valid.
+To handle that case, you can put such an input into a separate file and perform a check against the output, like:
+
+```kotlin
+fun main() {
+    // ...
+    
+    val testInput = readInput("Day01_test")
+    check(part1(testInput) == 13)
+}
+```
+
+The current approach of providing both `part1` and `part2` solutions within the single `Day##.kt` file may sometimes bring a disadvantage due to the first solution calculation when we expect to work on the second part only.
+With simple cases that don't consume too much of your time and resources that can be almost unnoticeable, but when the solution takes seconds, it is worth considering breaking the daily solution into two separated pieces, like `Day07_part1.kt` and `Day07_part2.kt`.
+
+The final result of your algorithm will be printed on the screen so that you can pass it to the Advent of Code website.
+
+To go with the next day, place the `Day02.txt` file into the `src` with relevant input data and create a `Day02.kt` file with a similar code scaffold:
+
+```kotlin
+fun main() {
+    fun part1(input: List<String>): Int {
+        return 0
+    }
+
+    fun part2(input: List<String>): Int {
+        return 0
+    }
+
+    val input = readInput("Day02")
+    println(part1(input))
+    println(part2(input))
+}
+```
+
+> [!NOTE]
+>
+> There is a fork of this repository available that utilizes the Amper tool for project configuration, recently [introduced by JetBrains][amper].
+>
+> For more, see [Advent of Code Kotlin Template — Amper][amper-template] project.
+
+## Getting help
+
+If you are stuck with Kotlin-specific questions or anything related to this template, check out the following resources:
+
+- [Kotlin docs][docs]
+- [Kotlin Slack][slack]
+- Template [issue tracker][issues]
+
+
+[actions-user]: https://github.com/actions-user
+[aoc]: https://adventofcode.com
+[amper]: https://blog.jetbrains.com/blog/2023/11/09/amper-improving-the-build-tooling-user-experience/
+[amper-template]: https://github.com/kotlin-hands-on/advent-of-code-kotlin-template-amper
+[docs]: https://kotlinlang.org/docs/home.html
+[docs-project-structure]: https://www.jetbrains.com/help/idea/project-settings-and-structure.html
+[issues]: https://github.com/kotlin-hands-on/advent-of-code-kotlin-template/issues
+[kiss]: https://en.wikipedia.org/wiki/KISS_principle
+[kotlin]: https://kotlinlang.org
+[slack]: https://surveys.jetbrains.com/s3/kotlin-slack-sign-up
+[file:cover]: .github/readme/cover.png
+[file:livestream]: .github/readme/livestream.png
+[file:utils]: src/Utils.kt
+[youtube-playlist]: https://www.youtube.com/playlist?list=PLlFc5cFwUnmwHaD3-qeoLHnho_PY2g9JX
